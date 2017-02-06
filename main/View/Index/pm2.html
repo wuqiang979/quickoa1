@@ -1,0 +1,78 @@
+<?php ArView::load('pm2.css'); ?>
+<?php ArView::load('layer/mobile/layer.js'); ?>
+<?php ArView::load('pm2.js'); ?>
+
+<!-- 项目成员管理 -->
+<div class="member-manage">
+	<!-- 成员列表 -->
+	<div class="container">
+		<ul class="member-list row">
+			<li class="col-sm-2 col-xs-3">
+				<a href="#"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/weixin.png"></a>
+				<div class="closeLayer" onClick="delete()" href="#" id="cross">
+					<img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/delPer.png">
+				</div>
+			</li>
+			<li class="col-sm-2 col-xs-3">
+				<a href="#"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/weibo.png"></a>
+				<div class="closeLayer" onClick="delete()" href="#" id="cross">
+					<img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/delPer.png">
+				</div>
+			</li>
+			<li class="col-sm-2 col-xs-3">
+				<a href="#"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/zhihu.png"></a>
+				<div class="closeLayer" onClick="delete()" href="#" id="cross">
+					<img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/delPer.png">
+				</div>
+			</li>
+			<li class="col-sm-2 col-xs-3">
+				<a href="#"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/jd.png"></a>
+				<div class="closeLayer" onClick="delete()" href="#" id="cross">
+					<img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/delPer.png">
+				</div>
+			</li>
+			<li class="col-sm-2 col-xs-3">
+				<a href="#"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/uber.png"></a>
+				<div class="closeLayer" onClick="delete()" href="#" id="cross">
+					<img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/delPer.png">
+				</div>
+			</li>
+			<li class="col-sm-2 col-xs-3">
+				<a href="#" class="del"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/del.png"></a>
+			</li>
+		</ul>
+	</div>
+	<div class="confirm">
+		<span>确认删除选中成员？</span>
+		<a class="btn btn-primary">确定</a>
+		<a class="btn btn-default">取消</a>
+	</div>
+	<div class="divide"></div>
+	<!-- 群组信息 -->
+	<div class="container group">
+		<ul class="group-name row">
+			<li class="pull-left">群组名称</li>
+			<a href="#" class="change-name"><li class="pull-right">未命名<span class="glyphicon glyphicon-menu-right"></span></li></a>
+		</ul>
+		<div class="boundary row"></div>
+		<ul class="qr-code row">
+			<li class="pull-left">群二维码</li>
+			<a href="#" class="change-code"><li class="pull-right"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>images/QR-bar.jpg" width="20px" height="20px"><span class="glyphicon glyphicon-menu-right"></span></li></a>
+		</ul>
+		<div class="boundary row"></div>
+		<ul class="affiche row">
+			<li class="pull-left">群公告</li>
+			<a href="#" class="change-affiche"><li class="pull-right">未设置<span class="glyphicon glyphicon-menu-right"></span></li></a>
+		</ul>
+		<div class="boundary row"></div>
+		<ul class="group-message row">
+			<li class="pull-left">群助手</li>
+			<a href="<?php echo arU('Index/pm3') ?>" class="new-passage"><li class="pull-right">人员审核<span class="glyphicon glyphicon-menu-right"></span></li></a>
+		</ul>
+	</div>
+	<div class="divide"></div>
+	<div>
+		<button class="btn btn-danger drop-out">退出群组</button>
+	</div>
+</div>
+

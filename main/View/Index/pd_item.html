@@ -1,0 +1,236 @@
+<script>
+    var pmProjectId = '<?php echo arRequest('id') ?>'
+</script>
+<div id="pd_itemWrap" style="padding:15px;/*margin-top: 30px*/">
+    <div id="rollingNews" class="panel panel-default" style="height:40px;background-color: #eee">
+        <div class="panel-body" style="padding-top:10px;padding-bottom: 10px">
+        <?php
+            if(isset($newInf) && is_array($newInf)):
+                foreach($newInf as $v):
+        ?>
+        <div class="newsItem">
+          <span class="newsText pull-left"><span class="newsBy"><?php echo $v['nickname'];?>&nbsp;&nbsp;</span><?php echo $v['content'];?></span>
+          <span class="newsTime pull-right"><?php echo $v['time'];?></span>
+        </div>
+        <?php endforeach;endif;?>
+       </div>
+    </div>
+    <!-- <div id="rollingNews" class="panel panel-default" style="margin-bottom: 10px;height:40px;background-color: #eee">
+       <div class="panel-body" style="padding-top:10px;padding-bottom: 10px">
+        <div class="newsItem">
+          <span class="newsText pull-left"><span class="newsBy">管理员&nbsp;</span>增加了某某职位</span>
+          <span class="newsTime pull-right">1分钟前</span>
+        </div>
+        <div class="newsItem">
+          <span class="newsText pull-left"><span class="newsBy">某人&nbsp;</span>增加了某某职位</span>
+          <span class="newsTime pull-right">2分钟前</span>
+        </div>
+        <div class="newsItem">
+          <span class="newsText pull-left"><span class="newsBy">某人&nbsp;</span>增加了某某职位</span>
+          <span class="newsTime pull-right">3分钟前</span>
+        </div>
+
+       </div>
+    </div> -->
+    <div class="panel panel-default" id="collapseOne">
+        <div class="panel-heading" style="border:0;">
+            <h4 class="panel-title clearfix">基本信息</h4>
+        </div>
+        <form class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th>项目名称</th>
+                    <td>
+                        <input type="text" name="i_name" value="" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width:80px">状态信息</th>
+                    <td class="pd_hasDropDown">
+                        <input type="text" name="status" value="" readonly>
+                        <div class="input-group-btn center-block">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span id="status" class="picked"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right pickMenu scrollable bottomHasMore" id="" style="min-width:90px">
+                                <li>未审核</li>
+                                <li>审核</li>
+                                <li>分析</li>
+                                <li>组队</li>
+                                <li>开发</li>
+                                <li>完成</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>项目金额</th>
+                    <td>
+                        <input type="text" name="money" value="" readonly>
+                    </td>
+                </tr>
+                <tr class="disabled">
+                    <th>发布人</th>
+                    <td>
+                        <input type="text" name="pmPublisher" value="" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <th>需求描述</th>
+                    <td>
+                        <!-- <input type="text" class="txtPopu" name="requirement" data-wangeditor='' value="" readonly> -->
+                        <textarea class="pminfo-requirement" name="requirement" rows="3" readonly ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>合同日期</th>
+                    <td>
+                        <input type="text" name="contractDate" class="datePicker" value="" readonly>
+                    </td>
+                </tr>
+                <tr class="disabled">
+                    <th>发布日期</th>
+                    <td>
+                        <input type="text" name="releaseDate" value="" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <th>开发周期</th>
+                    <td class="pd_hasDropDown">
+                        <input type="text" name="days" value="" readonly style="display: inline-block;max-width:100px">
+                        <div class="input-group-btn dropup" style="width:70px;float:right">
+                            <button type="button" class="btn btn-default
+                         dropdown-toggle" data-toggle="dropdown" style="min-width: 66px;">
+                                <span id="dateUnit" class="picked">天</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right pickMenu scrollable" id="dateUnitMenu" style="min-width:60px">
+                                <li>天</li>
+                                <li>周</li>
+                                <li>月</li>
+                                <li>年</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>二维码</th>
+                    <td class="text-center">
+                        <img id="pm_project_coderimg" src="" alt="项目二维码" class="qrcodeImg" height="100" width="100">
+
+                        <div class="bigImageWrap">
+                            <img src="<?php echo arComp('url.route')->host().'/Upload/'.$itemInf['img'];?>" alt="二维码">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>项目申请</th>
+                    <td class="text-center">
+                        <input type="text" name="apply" class="txtPopup" readonly>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="panel panel-default" id="collapseTwo">
+        <div class="panel-heading" style="border:0;">
+            <h4 class="panel-title clearfix">人员任务分配</h4>
+        </div>
+        <form class="table-responsive" id="pd_item_assign_table">
+            <table class="table table-bordered">
+            <?php
+                if(isset($data)):
+                    foreach($data as $value):
+                        $name = '';
+                        if(isset($value['man'])){
+                            $ids = array();
+                            foreach($value['man'] as $v){
+                                $ids[] = $v['id'];
+                                $name .= $v['nickname'].'&nbsp;';
+                            }
+                            $menDetails = json_encode($value['man']);
+                            $str = json_encode($ids);
+                        }else{
+                            $menDetails = '';
+                            $str = '';
+                        }
+            ?>
+                <tr>
+                    <th rowspan="2"><span class="glyphicon glyphicon-remove"></span>
+                        <div class="btn-group dropup">
+                            <button type="button" class="btn btn-default"><span class="picked" data-id="<?php echo $value['id'];?>" ><?php echo $value['j_name'];?></span><span class="caret"></span></button>
+                            <ul class="dropdown-menu scrollable" style="min-width:60px">
+                                <li class="departmentItems">
+                                    <ul></ul>
+                                </li>
+                                <li class="jobItems">
+                                    <ul></ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <?php
+                            if($value['relation'] != 'unlisted' ){
+                                if($value['relation'] != '参与'){
+                        ?>
+                        <br>
+                        <button type="button" class="btn btn-default applyBtn <?php if($value['relation'] !== '申请'){echo 'disable_btn';}?>" style="color:#666"><?php echo $value['relation'];?></button>
+                        <?php
+                                }
+                           }else{
+                        ?>
+                        <br>
+                        <button type="button" class="btn btn-default applyBtn" style="color:#666">申请</button>
+                        <?php
+                            }
+                        ?>
+                    </th>
+                    <th>人员
+                        <br>任务</th>
+                    <td>
+                        <input type="text" class="txtPopup" value="<?php echo $name;?>" data-details='<?php echo $menDetails;?>' data-ids=
+                        '<?php echo $str;?>' readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th>提成</th>
+                    <td>
+                        <input type="text" name="percent" class="moneyRatio" readonly value="<?php echo $value['percent'];?>">
+                    </td>
+                </tr>
+            <?php endforeach;endif;?>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top: -8px;">
+                    &times;
+                </button>
+                <h5 class="modal_title"></h5>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="modal-main">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalBtn" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/mobiscroll_date.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/mobiscroll.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/wangEditor.min.js"></script>
+<script>
+window.onload = function() {
+    pd_itemJs();
+    pmProjectInfoJs();
+
+    //富文本编辑器
+};
+</script>

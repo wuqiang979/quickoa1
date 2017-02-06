@@ -1,0 +1,137 @@
+.topBanner {
+	height: 450px;
+	background: url(../images/banner.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.bannerLeft {
+	height: 450px;
+	background: url(../images/logo.png) no-repeat center;
+}
+
+.bannerRight {
+	height: 350px;
+}
+
+.bannerForm {
+	margin-top: 100px;
+	color: white;
+}
+
+.loginWord {
+	margin-bottom: 20px;
+	font-size: 17px;
+	font-weight: bolder;
+}
+
+.forgetPwd {
+	color: white;
+}
+
+.content {
+	background: #E7E7E7;
+}
+
+.content_left_top {
+	margin-top: 40px;
+	background: white;
+}
+
+.product {
+	margin-top: 20px;
+	border-left: solid 3px #54abd4;
+	height: 34px;
+	margin-left: 15px;
+}
+
+.product h4 {
+	line-height: 34px;
+	padding-left: 10px;
+}
+
+.circle {
+	bottom: -30px;
+	position: static;
+	text-align: center;
+	width: 60%;
+	margin-left: 20%;
+}
+
+.carousel-indicators .active {
+	background-color: blue;
+}
+
+.carousel-indicators li {
+	border: 1px solid blue;
+}
+
+.thumbnail {
+	padding: 0px;
+}
+
+.productShow_a {
+	margin-top: 20px;
+}
+
+.proIntroduce {
+	position: absolute;
+	top: 36%;
+	text-align: center;
+	left: 0%;
+}
+
+.proIntroduce a {
+	color: blueviolet;
+}
+
+.project .caption {
+	background: #e7e7e7;
+	text-align: center;
+}
+
+.project .caption a:hover {
+	color: black;
+}
+
+.content_left_bottom {
+	margin-top: 20px;
+	background: white;
+}
+
+.project {
+	margin-top: 20px;
+}
+
+.more a {
+	color: #CCCCCC;
+	font-size: 12px;
+}
+
+.more a:hover {
+	color: #428bca;
+}
+
+.contentRight {
+	margin-top: 40px;
+	background: white;
+}
+
+.classify {
+	margin: 20px;
+}
+
+.contentRight a {
+	display: inline-block;
+	width: 60px;
+	height: 25px;
+	line-height: 25px;
+	background: cornflowerblue;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+.blank {
+	height: 40px;
+}

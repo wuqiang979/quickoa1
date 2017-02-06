@@ -1,0 +1,258 @@
+<?php ArView::load('wqUm.js'); ?>
+<!--项目管理-->
+<div id="pm_wrap">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+              href="#collapseOne">
+              发布项目
+            </a>
+            <span class="caret mzm-caret-fixed"></span>
+          </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form id="publishForm" role="form">
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">名称</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <input type="text" name="i_name" class="form-control" placeholder="名称">
+                        </div>
+                        <br>
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">金额</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="right:40px"></span>
+                            <input type="text" name="money" class="form-control" placeholder="金额">
+                            <span class="input-group-addon">￥</span>
+                        </div>
+                        <br>
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">需求描述</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <input type="text" name="requirement" class="form-control txtPopup" placeholder="需求描述" readonly>
+                        </div>
+                        <br>
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">状态信息</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <!-- <input type="text" name="status" class="form-control" placeholder="状态信息"> -->
+                            <div class="input-group-btn dropup" style="width:100%">
+                                <button type="button" class="btn btn-default
+                         dropdown-toggle" data-toggle="dropdown" style="width:100%;">
+                                    <span id="status" class="picked">未审核</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right pickMenu scrollable bottomHasMore" id="" style="min-width:60px">
+                                    <li>未审核</li>
+                                    <li>审核</li>
+                                    <li>分析</li>
+                                    <li>组队</li>
+                                    <li>开发</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">合同日期</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <input type="text" name="contractDate" class="form-control datePicker" placeholder="合同日期" readonly>
+                        </div>
+                        <br>
+                        <div class="input-group has-feedback">
+                            <span class="input-group-addon">开发周期</span>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true" style="right:60px;"></span>
+                            <input type="text" name="days" class="form-control" placeholder="开发周期">
+                            <div class="input-group-btn dropup">
+                                <button type="button" class="btn btn-default
+                         dropdown-toggle" data-toggle="dropdown" style="min-width: 66px;">
+                                    <span id="dateUnit" class="picked">天</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right pickMenu scrollable" id="dateUnitMenu" style="min-width:60px">
+                                    <li><a href="javascript:;">天</a></li>
+                                    <li><a href="javascript:;">周</a></li>
+                                    <li><a href="javascript:;">月</a></li>
+                                    <li><a href="javascript:;">年</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="text-center" style="padding:0 40px">
+                            <input class="btn btn-primary btn-block btn-lg" id="pmSubmitBtn" type="button" value="提交">
+                            <!-- <input class="btn btn-default" id="pmCancelBtn" type="button" value="取消"> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                      href="#collapseTwo">
+                      查看项目
+                    </a>
+                    <span class="caret mzm-caret-fixed"></span>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collaps collapse">
+                <div class="panel-body" style="padding-bottom:0">
+                    <div class="manage_wrap">
+                        <span class="mzm-manage-btn pull-left glyphicon glyphicon-remove"></span>
+                        <span class="mzm-manage-btn pull-right glyphicon glyphicon-cog"></span>
+                    </div>
+                    <!-- 所有项目展示盒子 开始 -->
+                    <div class="row" id="project_wrap"></div><!-- 所有项目展示盒子 结束 -->
+                </div>
+                <div id="loading_more">
+                    <a href="javascript:;">
+                        加载更多<span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+              href="#collapseThree">
+              项目回收
+            </a>
+            <span class="caret mzm-caret-fixed"></span>
+          </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body" style="padding-bottom:0">
+                    <div class="manage_wrap">
+                        <span class="mzm-manage-btn pull-left glyphicon glyphicon-remove"></span>
+                        <span class="mzm-manage-btn pull-right glyphicon glyphicon-ok"></span>
+                    </div>
+                    <div class="row">
+                    <?php
+                        if(isset($itemsOff)):
+                            foreach($itemsOff as $value):
+                    ?>
+                        <div class="pItemWrap col-xs-6 col-sm-3">
+                            <div class="thumbnail">
+                                <img src="<?php echo arComp('url.route')->host().'/Upload/'.$value['img'];?>" width="100" height="100" alt="项目名称">
+                                <div class="caption clearfix relative">
+                                    <h4 class="projectName" data-id="<?php echo $value['id'];?>"><?php echo $value['i_name'];?></h4>
+                                    <p class="pdJoinNum pull-left"><span><?php echo $value['usersNum'];?></span>人参与</p>
+                                    <p class="pull-right status"><?php echo $value['statusN'];?></p>
+                                    <span class="glyphicon glyphicon-ok revertBtn"></span>
+                                </div>
+                            </div>
+                            <div class="bigImageWrap">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" alt="">
+                            </div>
+                        </div>
+                    <?php endforeach;endif;?>
+                        <!-- <div class="pItemWrap col-xs-6 col-sm-3">
+                            <div class="thumbnail">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" width="100" height="100" alt="项目名称">
+                                <div class="caption clearfix relative">
+                                    <h4 class="projectName" data-id="101">项目1</h4>
+                                    <p class="pdJoinNum pull-left"><span>5</span>人参与</p>
+                                    <p class="pull-right status">未审核</p>
+                                    <span class="glyphicon glyphicon-ok revertBtn"></span>
+                                </div>
+                            </div>
+                            <div class="bigImageWrap">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="pItemWrap col-xs-6 col-sm-3">
+                            <div class="thumbnail">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" width="100" height="100" alt="项目名称">
+                                <div class="caption clearfix relative">
+                                    <h4 class="projectName" data-id="102">项目2</h4>
+                                    <p class="pdJoinNum pull-left"><span>5</span>人参与</p>
+                                    <p class="pull-right status">未审核</p>
+                                    <span class="glyphicon glyphicon-ok revertBtn"></span>
+                                </div>
+                            </div>
+                            <div class="bigImageWrap">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="pItemWrap col-xs-6 col-sm-3">
+                            <div class="thumbnail">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" width="100" height="100" alt="项目名称">
+                                <div class="caption clearfix relative">
+                                    <h4 class="projectName" data-id="103">项目3</h4>
+                                    <p class="pdJoinNum pull-left"><span>5</span>人参与</p>
+                                    <p class="pull-right status">未审核</p>
+                                    <span class="glyphicon glyphicon-ok revertBtn"></span>
+                                </div>
+                            </div>
+                            <div class="bigImageWrap">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="pItemWrap col-xs-6 col-sm-3">
+                            <div class="thumbnail">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" width="100" height="100" alt="项目名称">
+                                <div class="caption clearfix relative">
+                                    <h4 class="projectName" data-id="104">项目4</h4>
+                                    <p class="pdJoinNum pull-left"><span>5</span>人参与</p>
+                                    <p class="pull-right status">未审核</p>
+                                    <span class="glyphicon glyphicon-ok revertBtn"></span>
+                                </div>
+                            </div>
+                            <div class="bigImageWrap">
+                                <img src="<?php echo arCfg('PATH.GPUBLIC'); ?>images/qrcode.jpg" alt="">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top: -8px;">
+                    &times;
+                </button>
+                <h5 class="modal_title" style="margin:0"></h5>
+            </div>
+            <div class="modal-body">
+                <div class="modal-main"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalBtn" class="btn btn-default" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="prject_modal" style="display: none;">
+    <div class="pItemWrap col-xs-6 col-sm-3">
+        <div class="thumbnail">
+            <a href="<?php echo arU('Index/pd_item', array('id' => 'prejectIdM'));?>">
+                <img src="prejectSrcM" width="100" height="100" style="height:100px" alt="项目二维码">
+            </a>
+            <div class="caption clearfix relative">
+                <h4 class="projectName"  data-id="prejectIdM">prejectNameM</h4>
+                <p class="pdJoinNum pull-left"><span>partersM</span>人参与</p>
+                <p class="pull-right status">prejectStatusM</p>
+                <a href="<?php echo arU('Index/pm2',array('id'=>'aa')) ?>" class="fillMask"></a>
+                <span class="glyphicon glyphicon-remove removeBtn"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+<script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/mobiscroll_date.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/mobiscroll.js"></script>
+<script>
+    window.onload=function(){
+        pmJs();
+        pmProjectJs();
+    };
+</script>
+<!--项目管理 END-->

@@ -1,0 +1,244 @@
+<div class="pd-20">
+    <form action="" method="post" class="form form-horizontal" id="form-article-add">
+        <input type="hidden" name="itemId" value="<?php if(isset($preList['id'])) { echo $preList['id']; } ?>">
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>项目名称：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="text" class="input-text"
+                       value="<?php if(isset($preList['i_name'])) { echo $preList['i_name']; }?>" placeholder=""
+                       name="i_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>金额(元)：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="text" class="input-text"
+                       value="<?php if(isset($preList['money'])) { echo $preList['money']; } ?>" placeholder=""
+                       name="money">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>合同日期：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="text" id="laydate1" class="input-text laydate-icon" style="height: 30px"
+                       value="<?php if(isset($preList['contractDate'])) { echo $preList['contractDate']; } ?>"
+                       placeholder="" name="contractDate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>开发进度：</label>
+            <div class="formControls col-2">
+                <span class="select-box">
+                    <select class="select" name="status">
+                        <option value="0">-- 请选择 --</option>
+                        <?php foreach($statusType as $row) {?>
+                        <option value="<?php echo $row['id']; ?>"
+                        <?php if(isset($preList['status'])) {
+                            if(  $preList['status'] ==  $row['id']){
+                                echo "selected = 'selected'";
+                             }
+                       }?>
+                        ><?php echo $row['name']; ?></option>
+                        <?php } ?>
+                    </select>
+				</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>发布人：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="hidden" name="publisher" id="hiddenId"
+                       value="<?php if(isset($preList['publisher'])) { echo $preList['publisher']; } ?>">
+                <input type="text" class="input-text receiverName"
+                       value="<?php if(isset($preList['publisherName'])) { echo $preList['publisherName']; } ?>"
+                       placeholder="" name="publisherName">
+                <div id="receiverName" style="width:100px;max-height:215px;overflow-y:scroll;overflow-x: hidden; padding:5px 0; position:absolute;z-index:10;
+                top: 1px;right: -100px;background-color: #F5F5F5; display: none">
+
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>发布日期：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="text" id="laydate2" class="input-text laydate-icon" style="height: 30px"
+                       value="<?php if(isset($preList['releaseDate'])) { echo $preList['releaseDate']; } ?>"
+                       placeholder="" name="releaseDate">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>开发周期：</label>
+            <div class="formControls col-2" style="position: relative;">
+                <input type="text" class="input-text daysNum"
+                       value="<?php if(isset($preList['days'])) { echo $preList['days']; } ?>"
+                       name="days">
+                <div id="days" style="width:40px;height:120px; padding:10px 0; position:absolute;z-index:10;
+                top: 1px;right: -30px;background-color: #F5F5F5; display: none">
+                    <p style="margin-left: 15px">天</p>
+                    <p style="margin-left: 15px">周</p>
+                    <p style="margin-left: 15px">月</p>
+                    <p style="margin-left: 15px">年</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>成员：</label>
+            <div class="formControls col-2">
+                <select id="usersSelect" class="selectpicker show-tick form-control" data-width="100%" multiple
+                        title="-- 请选择 --" name="users[]">
+                    <?php foreach($users as $row) { ?>
+                    <option value="<?php echo $row['id']; ?>"
+                    <?php
+                        if(isset($preList['users'] )){
+                            foreach($preList['users'] as $v) {
+                                if($v ==  $row['id']) echo "selected = 'selected'";
+                            }
+                        }
+                      ?> >
+                    <?php echo $row['nickname']; ?>
+                    </option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>项目状态：</label>
+            <div class="formControls col-2">
+                <span class="select-box">
+                    <select class="select" name="online">
+                        <option value="-1">-- 请选择 --</option>
+                        <option value="0"
+                        <?php
+                        if(isset($preList['online'])) {
+                            if($preList['online'] === 0) {
+                                echo "selected = 'selected'";
+                            }
+                        }
+                        ?> >停用</option>
+                        <option value="1"
+                        <?php
+                        if(isset($preList['online'])){
+                            if($preList['online'] == 1) {
+                                echo "selected = 'selected'";
+                            }
+                        }
+                        ?> >未停用</option>
+                    </select>
+				</span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>需求描述：</label>
+            <div class="formControls col-4">
+                <textarea name="content" style="height: 150px" class="textarea" placeholder="说点什么...最少输入10个字符"
+                          datatype="*10-100"
+                          dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)">
+                   <?php if(isset($preList['requirement'])) { echo $preList['requirement']; } ?>
+                </textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button class="btn btn-secondary radius ajax-post" type="submit">&nbsp;&nbsp;发布&nbsp;&nbsp;</button>
+                <button class="btn btn-default radius" type="button" id="reset" style="margin-left: 20px">
+                    &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!--js部分-->
+<script src="<?php echo arCfg('PATH.GPUBLIC') ?>js/jquery.form.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC') ?>js/common.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC') ?>js/jquery.validate.min.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC') ?>js/layer/layer.js"></script>
+<script src="<?php echo arCfg('PATH.GPUBLIC') ?>js/layui/layui.js"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC') ?>js/H-ui.js"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC') ?>js/H-ui.admin.js"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC') ?>js/laydate/laydate.js"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC') ?>js/bootstrap-select.js"></script>
+<script>
+    // 清空搜索框
+    $('#reset').click(function () {
+        $(this).parent().parent().parent().find('textarea').prop('value', "");
+        $(this).parent().parent().parent().find('input').prop('value', "");
+        $(this).parent().parent().parent().find('option').prop("selected", false);
+        ;
+    });
+
+    // 时间控件
+    laydate.skin('molv');
+    laydate({
+        format: 'YYYY-MM-DD hh:mm:ss',
+        elem: '#laydate1'
+    });
+    laydate({
+        elem: '#laydate2',
+        format: 'YYYY-MM-DD hh:mm:ss',
+    });
+
+    // 开发周期单位
+    $('.daysNum').keyup(function () {
+        if ($('.daysNum').val() != "") {
+            $("#days").css('display', 'block');
+        } else {
+            $("#days").css('display', 'none');
+        }
+    });
+
+    // 双击选中
+    $("p").dblclick(function () {
+        var val = $(this).html();
+        var preVal = $('.daysNum').val();
+
+        $('.daysNum').val(preVal + val);
+        $("#days").css('display', 'none');
+    });
+
+
+    // 动态展示发布人
+    $('.receiverName').keyup(function () {
+        if ($('.receiverName').val() != "") {
+            $.ajax({
+                type: 'get',
+                url: '<?php echo arU("News/receiverList");?>',
+                data: {'receiver': $('.receiverName').val()},
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var receiver = data.data;
+                    $("#receiverName").empty();
+                    $("#receiverName").append(" <p value='all'>" + "全体成员" + "</p>");
+                    $("#receiverName").css('display', 'block');
+                    // 遍历添加
+                    for (i in receiver) {
+                        $("#receiverName").append(" <p value = " + receiver[i]['id'] + ">" + receiver[i]['nickname'] + "</p>");
+                    }
+                }
+            });
+        } else {
+            // 清空收件人
+            $("#receiverName").empty();
+            $("#receiverName").css('display', 'none');
+        }
+
+    });
+
+    // 选中收件人
+    $("#receiverName").on("dblclick", "p", function () {
+        var receiver = $(this).html();
+        var hiddenId = $(this).attr('value');
+        $(this).parent().prev('input').val(receiver);
+        $(this).parent().parent().find('#hiddenId').val(hiddenId);
+        // 清空收件人
+        $("#receiverName").empty();
+        $("#receiverName").css('display', 'none');
+    });
+
+</script>
